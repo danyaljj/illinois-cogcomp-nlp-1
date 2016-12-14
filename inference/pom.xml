@@ -57,12 +57,22 @@
             <version>0.8.3</version>
         </dependency>
         <dependency>
-            <groupId>de.zib.jscip.nativ</groupId>
-            <artifactId>scip</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/scip.jar</systemPath>
+            <groupId>edu.illinois.cs.cogcomp</groupId>
+            <artifactId>scip-jni</artifactId>
+            <version>3.1.1</version>
         </dependency>
+        <dependency>
+            <groupId>edu.illinois.cs.cogcomp</groupId>
+            <artifactId>scip-solver</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>de.zib.jscip.nativ</groupId>-->
+            <!--<artifactId>scip</artifactId>-->
+            <!--<version>1.0</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${basedir}/lib/scip.jar</systemPath>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>
@@ -71,11 +81,11 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19.1</version>
                 <configuration>
-                    <!--<forkMode>true</forkMode>-->
+                    <forkMode>true</forkMode>
                     <useSystemClassLoader>true</useSystemClassLoader>
                     <environmentVariables>
-                        <LD_LIBRARY_PATH>${basedir}/lib/</LD_LIBRARY_PATH>
-                        <DYLD_LIBRARY_PATH>${basedir}/lib/</DYLD_LIBRARY_PATH>
+                        <LD_LIBRARY_PATH>lib/*</LD_LIBRARY_PATH>
+                        <DYLD_LIBRARY_PATH>lib/*</DYLD_LIBRARY_PATH>
                     </environmentVariables>
                 </configuration>
             </plugin>

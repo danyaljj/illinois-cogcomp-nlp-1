@@ -69,6 +69,28 @@ public class MathUtilities {
         return new Pair<>(argMin, max);
     }
 
+
+    /**
+     * Find the argmax and max in an int array. If the array is empty, the function returns (-1,
+     * Integer.MIN_VALUE)
+     */
+    public static Pair<Long, Long> max(long[] array) {
+        long max = Integer.MIN_VALUE;
+        long argMin = -1;
+
+        int id = 0;
+        for (long d : array) {
+            if (d > max) {
+                max = d;
+                argMin = id;
+            }
+
+            id++;
+        }
+
+        return new Pair<>(argMin, max);
+    }
+
     /**
      * Find the argmax and max in a list of elements that can are ordered. If the list is empty, the
      * function returns (-1, null).
