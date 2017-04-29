@@ -25,9 +25,9 @@ import spark.Filter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static spark.Spark.*;
 
@@ -99,7 +99,7 @@ public class MainServer {
         // create a hashmap to keep track of client ip addresses and their
         int rate = parseResults.getInt("rate");
         if( rate > 0) {
-            clients = new HashMap<String, Integer>();
+            clients = new ConcurrentHashMap<String, Integer>();
         }
 
         AnnotatorService finalPipeline = pipeline;
