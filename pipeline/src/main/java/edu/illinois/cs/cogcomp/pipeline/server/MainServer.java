@@ -13,6 +13,7 @@ import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation
 import edu.illinois.cs.cogcomp.core.utilities.SerializationHelper;
 
 import edu.illinois.cs.cogcomp.pipeline.main.PipelineFactory;
+import edu.illinois.cs.cogcomp.pipeline.server.TemplateEngine.FreeMarkerEngine;
 import net.sourceforge.argparse4j.ArgumentParsers;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.ArgumentParserException;
@@ -21,10 +22,12 @@ import net.sourceforge.argparse4j.internal.HelpScreenException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Filter;
+import spark.ModelAndView;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -97,6 +100,14 @@ public class MainServer {
                 }
         );
 
+        get("/", (request, response) -> {
+            Map<String, Object> viewObjects = new HashMap<String, Object>();
+            viewObjects.put("title", "Welcome to Spark Project");
+            viewObjects.put("templateName", "home.ftl");
+            return new ModelAndView(viewObjects, "main.ftl");
+        }, new FreeMarkerEngine());
+
+
         // api to get name of the available views
         String viewsString = "";
         for(String view : pipeline.getAvailableViews()) {
@@ -112,7 +123,8 @@ public class MainServer {
     }
 
     public static void main(String[] args) {
-        setPipeline(logger);
+        staticFileLocation("/public");
+//        setPipeline(logger);
         startServer(args, logger);
     }
 
