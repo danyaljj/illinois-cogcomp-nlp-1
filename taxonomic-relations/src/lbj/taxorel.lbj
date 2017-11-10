@@ -1,0 +1,25 @@
+package org.cogcomp.taxorel.lbjGen;
+import org.cogcomp.taxorel.Instance;
+
+import java.util.*;
+import org.cogcomp.taxorel.Constants;
+
+real dLxCy(Instance ins) <- { return ins.ratio_TtlCat;}
+real dCxLy(Instance ins) <- { return ins.ratio_CatTtl;}
+real dCxCy(Instance ins) <- { return ins.ratio_CatCat;}
+real pmi(Instance ins) <- { return ins.scorePmi_E1E2;}
+real sTxTy(Instance ins) <- { return ins.scoreCos_AbsAbs;}
+real sCxCy(Instance ins) <- { return ins.scoreCos_CatCat;}
+real sTxCy(Instance ins) <- { return ins.scoreCos_AbsCat;}
+real sCxTy(Instance ins) <- { return ins.scoreCos_CatAbs;}
+
+discrete Label(Instance ins) <-
+{
+  return ins.relation;
+}
+
+discrete AFRelationClassifier(Instance ins) <-
+learn Label
+	using dLxCy, dCxLy, dCxCy, pmi, sTxTy, sCxCy, sTxCy, sCxTy
+	with new SparseNetworkLearner(new SparseAveragedPerceptron(Constants.learningRate, Constants.learningThreshold, Constants.learningThickness))
+end
