@@ -21,8 +21,13 @@ public class AllTest {
         try {
             //Ignore this. This is for CV
             for (int fold = 1; fold < 2; fold ++) {
+
+                //TODO: Modify Me to correct local path of '20000.new.first8000.shuffled.inter'!
                 List<Instance> trainingExamples = DataHandler.readTrainingInstances("data/jupiter/data/www10/K3/20000.new.first8000.shuffled.inter", Constants.INPUT_TYPE_INTERMEDIATE);
+
+                //TODO: Modify Me to correct local path of '20000.new.last12000.shuffled.inter'!
                 List<Instance> testingExamples = DataHandler.readTestingInstances("data/jupiter/data/www10/K3/20000.new.last12000.shuffled.inter", Constants.INPUT_TYPE_INTERMEDIATE, DataHandler.READ_ALL);
+
                 AFRelationClassifier afRelationClassifier = new AFRelationClassifier();
                 Label judge = new Label();
                 double largestPMI = 0.0;
@@ -74,9 +79,16 @@ public class AllTest {
     }
 
     public static void testWithConstraints(){
+
+        //TODO: Modify Me to correct local path of '20000.new.last12000.beyondwiki.shuffled.relatedconcept.555.inter'!
         String supportingInterFile = "data/jupiter/data/www10/K3/20000.new.last12000.beyondwiki.shuffled.relatedconcept.555.inter";
+
+        //TODO: Modify Me to correct local path of '20000.new.last12000.beyondwiki.shuffled.expanded.inter'!
         String interFile = "data/jupiter/data/www10/K3/20000.new.last12000.beyondwiki.shuffled.expanded.inter";
+
+        //TODO: Modify Me to correct local path of '20000.new.first8000.shuffled.inter'!
         String trainFile = "data/jupiter/data/www10/K3/20000.new.first8000.shuffled.inter";
+
         try {
             AFRelationClassifier afRelationClassifier = new AFRelationClassifier();
             List<Instance> trainingExamples = DataHandler.readTrainingInstances(trainFile, Constants.INPUT_TYPE_INTERMEDIATE);
@@ -93,9 +105,8 @@ public class AllTest {
                     afRelationClassifier.learn(instance);
                 }
             }
-            String PMI_FILE = "data/jupiter/data/pmi_value.txt";
             String pmi = Double.toString(largestPMI);
-            DataHandler.writeContent(pmi, PMI_FILE);
+            DataHandler.writeContent(pmi, Constraints.PMI_FILE);
             ArrayList<Instance> arrSupportingInstances = DataHandler
                     .readTestingInstances(supportingInterFile,
                             Constants.INPUT_TYPE_INTERMEDIATE,

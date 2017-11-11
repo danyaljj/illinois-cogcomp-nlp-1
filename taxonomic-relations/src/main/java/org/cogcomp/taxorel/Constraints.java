@@ -412,7 +412,7 @@ public class Constraints {
         if (arrInstances.size() > 0)
             acc = (double) count / (double) n;
 
-        System.out.println("Acc: " + acc);
+        System.out.println("Accuracy: " + acc);
 
         double p = (double)correct / (double)predicted;
         double r = (double)correct / (double)labeled;

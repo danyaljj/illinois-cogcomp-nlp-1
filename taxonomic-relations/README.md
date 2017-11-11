@@ -10,9 +10,11 @@ In order to run the tests,
 
 `mvn lbjava:generate` to generate the LBJ Classifiers.
 
-Then modify the data path variables within the two functions in `AllTest.java`
+Modify `PMI_FILE` and `CONSTRAINT_WEIGHTS` variable in `Constraints.java` to correct local paths of those two files.
 
-Then modify the main function of `AllTest.java`
+Then modify the data path variables (Marked as "TODO") within the two functions in `AllTest.java` to correct local paths of the data files.
+
+Then modify the main function of `AllTest.java` to run each of the tests. Don't run both at the same time, since there are a lot of debug outputs.
 
 ## Understanding the results
 
